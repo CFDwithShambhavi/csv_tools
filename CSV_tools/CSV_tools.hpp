@@ -9,17 +9,33 @@
 #ifndef CSV_tools_hpp
 #define CSV_tools_hpp
 
-#include <stdio.h>
 #include <string>
+#include <vector>
 
-template<typename T>
-class CSV_tools {
+template <typename T>
+class CSV_tools{
+    
+private:
+    int row_count;
+    int column_count;
+    std::vector< std::vector<std::string> > csv_data;
+    std::string* headers;
     
 public:
+    CSV_tools();
+    ~CSV_tools();
     
-    T read_data(const std::string&) = 0;
-    T write_data(const std::string&) = 0;
+private:
+    std::tuple<int, int> get_row_and_col_count(const std::string& file_name, const char& separator);
     
+public:
+    T read_data(const std::string& file_name, const char& separator);
+    int get_row_count() const;
+    int get_column_count() const;
+    std::vector<std::string> get_headers() const;
+    std::vector<T> get_data_under_header(const std::string& header_name) const;
 };
+
+
 
 #endif /* CSV_tools_hpp */

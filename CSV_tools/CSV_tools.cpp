@@ -12,25 +12,31 @@
 #include <fstream>
 #include <sstream>
 #include <array>
-#include <tuple>
-#include <map>
 
 template <typename T>
 CSV_tools<T>::CSV_tools()
     : row_count(0),
     column_count(0),
     headers(NULL),
+    header_data(NULL),
     csv_data(NULL)
     {
     }
 
 template <typename T>
+CSV_tools<T>::CSV_tools(int& rows, int& columns)
+{
+    headers.reserve(columns);
+    header_data.reserve(rows - 1);
+    csv_data.reserve(rows - 1);
+}
+
+template <typename T>
 CSV_tools<T>::~CSV_tools(){
-        delete [] headers;
     }
 
 template <typename T>
-std::tuple<int, int> CSV_tools<T>::get_row_and_col_count(const std::string& file_name, const char& separator){
+void CSV_tools<T>::initialise_memory(const std::string& file_name, const char& separator){
         
         std::ifstream data(file_name);
         
@@ -53,17 +59,15 @@ std::tuple<int, int> CSV_tools<T>::get_row_and_col_count(const std::string& file
             if (traversed_one_row)
                 column_count = cols;
         }
-        
-        return {row_count, column_count};
+    
+    CSV_tools(row_count, column_count);
+    
     }
 
 template <typename T>
 T CSV_tools<T>::read_data(const std::string& file_name, const char& separator) {
         
-        auto [no_of_rows, no_of_cols] = get_row_and_col_count(file_name, separator);
-        
-        headers = new std::string[no_of_cols];
-        csv_data.reserve(no_of_rows - 1);
+        initialise_memory(file_name, separator);
 
         std::ifstream data(file_name);
         
@@ -72,7 +76,7 @@ T CSV_tools<T>::read_data(const std::string& file_name, const char& separator) {
         while(std::getline(data, line))
         {
             std::vector<std::string> values;
-            values.reserve(no_of_cols);
+            values.reserve(column_count);
 
             std::stringstream lineStream(line);
             std::string elements;
@@ -81,7 +85,7 @@ T CSV_tools<T>::read_data(const std::string& file_name, const char& separator) {
             while(std::getline(lineStream, elements, separator))
             {
                 if (rows == 0) {
-                    headers[cols] = elements;
+                    headers.emplace_back(elements);
                 }
                 else {
                     values.emplace_back(elements);
@@ -101,7 +105,7 @@ T CSV_tools<T>::read_data(const std::string& file_name, const char& separator) {
 
 template <typename T>
 int CSV_tools<T>::get_row_count() const{
-        return row_count;
+    return row_count;
     }
 
 template <typename T>
@@ -111,32 +115,18 @@ int CSV_tools<T>::get_column_count() const{
 
 template <typename T>
 std::vector<std::string> CSV_tools<T>::get_headers() const{
-        
-        std::vector<std::string> headers_;
-        
-        headers_.reserve(column_count);
-        
-        for(int i = 0; i < column_count; i++) {
-            
-            headers_.emplace_back(headers[i]);
-            
-        }
-        return headers_;
+        return headers;
     }
 
 template <typename T>
-std::vector<T> CSV_tools<T>::get_data_under_header(const std::string& header_name) const{
-        
+std::vector<T>& CSV_tools<T>::get_data_under_header(const std::string& header_name){
+    
         int header_index = 0;
         for(int i = 0; i < column_count; i++) {
             if (headers[i] == header_name) {
                 header_index = i;
             }
         }
-    
-        std::vector<T> header_data;
-        header_data.reserve(row_count - 1);
-        
         for(int i = 0; i < row_count - 1; i++) {
             header_data.emplace_back(atof(csv_data[i][header_index].c_str()));
         }

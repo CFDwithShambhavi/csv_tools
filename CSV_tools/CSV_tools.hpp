@@ -17,15 +17,18 @@ template <typename T>
 class CSV_tools{
     
 private:
-    int row_count;
+    int row_count_with_headers;
+    int row_count_without_headers;
     int column_count;
-    std::vector< std::vector<std::string> > csv_data;
-    std::vector< std::string > headers;
+    std::vector<std::vector<T>> csv_data;
     std::vector<T> header_data;
-    std::map<std::string, T> data;
-    
+    std::vector<T> row_data;
+    std::map<std::string, std::vector<T>> Data;
+    std::vector< std::string > units;
+    std::vector< std::string > headers;
+
 private:
-    void initialise_memory(const std::string& file_name, const char& separator);
+    void initialise_memory(const std::string& file_name, bool headers_, bool units_, const char& separator);
     
 public:
     CSV_tools();
@@ -33,12 +36,15 @@ public:
     ~CSV_tools();
 
 public:
-    T read_data(const std::string& file_name, const char& separator);
-    std::vector<T>& get_data_under_header(const std::string& header_name);
+    std::map<std::string, std::vector<T>>& read_Data(const std::string& file_name, bool headers_, bool units_, const char& separator);
     
-    int get_row_count() const;
+    int get_row_count_with_headers() const;
+    int get_row_count_without_headers() const;
     int get_column_count() const;
+    const std::vector<T>& get_data_in_row(int& row_num);
+    const std::vector<T>& get_data_under_header(const std::string& header_name);
     std::vector<std::string> get_headers() const;
+    std::vector<std::string> get_units() const;
 };
 
 

@@ -9,17 +9,19 @@
 
 int main() {
     
+    std::string path_name = "/Users/snandan/CSV_tools/CSV_tools/";
+    std::string file_name = path_name + "nuclea17_1_results_Cuz08_Cox06.csv";
     CSV_tools<double> load_data;
-    load_data.read_data("/Users/snandan/CSV_tools/CSV_tools/nuclea17_1_results_Cuz08_Cox06.csv", ';');
+    load_data.read_Data(file_name, true, false, ';');
     std::cout<< load_data.get_column_count() <<std::endl;
-    std::cout<< load_data.get_row_count() <<std::endl;
+    std::cout<< load_data.get_row_count_without_headers() <<std::endl;
     std::vector<std::string> headers = load_data.get_headers();
     std::cout<<headers.size()<<std::endl;
+    int row_num = 0;
+    std::vector<double> row_data = load_data.get_data_in_row(row_num);
     
-    std::vector<double> head_data = load_data.get_data_under_header(headers[3]);
-    
-    for(int i = 0; i < head_data.size(); i++) {
-        std::cout<<head_data[i]<<std::endl;
+    for(int i = 0; i < row_data.size(); i++) {
+        std::cout<<row_data[i]<<std::endl;
     }
     
         return 0;

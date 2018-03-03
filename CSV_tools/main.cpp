@@ -10,7 +10,7 @@
 int main() {
     
     std::string path_name = "/Users/snandan/CSV_tools/CSV_tools/";
-    std::string file_name = path_name + "FL_insurance_sample.csv";
+    std::string file_name = path_name + "Most-Recent-Cohorts-Scorecard-Elements.csv";
     CSV_tools<std::string> load_data;
     load_data.read_Data(file_name, true, false, ',');
     std::cout<< load_data.get_column_count() <<std::endl;

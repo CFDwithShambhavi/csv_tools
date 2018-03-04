@@ -28,7 +28,7 @@ private:
     std::map<std::string, std::vector<T>> Data;
 
 private:
-    void initialise_memory(const std::string& file_name, bool headers_, bool units_, const char& separator);
+    void initialise_memory(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator);
     
 public:
     CSV_tools();
@@ -36,7 +36,7 @@ public:
     ~CSV_tools();
 
 public:
-    std::map<std::string, std::vector<T>>& read_Data(const std::string& file_name, bool headers_, bool units_, const char& separator);
+    std::map<std::string, std::vector<T>>& read_Data(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator);
     
     int get_row_count_with_headers() const;
     int get_row_count_without_headers() const;
@@ -47,6 +47,20 @@ public:
     std::vector<std::string> get_units() const;
 };
 
-
+class scope{
+    
+private:
+    CSV_tools<double>* ptr;
+public:
+    scope(CSV_tools<double>* ptr)
+    :ptr(ptr)
+    {
+    }
+    
+    ~scope(){
+        delete ptr;
+    }
+    
+};
 
 #endif /* CSV_tools_hpp */

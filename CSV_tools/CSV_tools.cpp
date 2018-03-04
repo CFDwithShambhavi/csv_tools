@@ -40,7 +40,7 @@ CSV_tools<T>::~CSV_tools(){
     }
 
 template <typename T>
-void CSV_tools<T>::initialise_memory(const std::string& file_name, bool headers_, bool units_, const char& separator){
+void CSV_tools<T>::initialise_memory(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator){
         
         std::ifstream data(file_name);
         
@@ -79,7 +79,7 @@ void CSV_tools<T>::initialise_memory(const std::string& file_name, bool headers_
 
 
 template <typename T>
-std::map<std::string, std::vector<T>>& CSV_tools<T>::read_Data(const std::string& file_name, bool headers_, bool units_, const char& separator){
+std::map<std::string, std::vector<T>>& CSV_tools<T>::read_Data(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator){
     
     initialise_memory(file_name, headers_, units_, separator);
     

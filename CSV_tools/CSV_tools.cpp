@@ -98,7 +98,7 @@ void CSV_tools<T>::initialise_memory(const std::string& file_name, const bool& h
 
 
 template <typename T>
-std::map<std::string, std::vector<T>>& CSV_tools<T>::read_Data(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator){
+const std::map<std::string, std::vector<T>>& CSV_tools<T>::read_Data(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator){
     
     initialise_memory(file_name, headers_, units_, separator);
     

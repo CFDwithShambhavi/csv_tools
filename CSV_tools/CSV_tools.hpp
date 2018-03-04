@@ -38,7 +38,7 @@ public:
     ~CSV_tools();
 
 public:
-    std::map<std::string, std::vector<T>>& read_Data(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator);
+    const std::map<std::string, std::vector<T>>& read_Data(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator);
     
     const int& get_row_count_with_headers() const;
     const int& get_row_count_without_headers() const;

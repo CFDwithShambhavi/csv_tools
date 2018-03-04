@@ -77,7 +77,7 @@ void CSV_tools<T>::initialise_memory(const std::string& file_name, const bool& h
             {
                 cols += 1;
                     }
-            if (traversed_one_row == false){
+            if (!traversed_one_row){
                 column_count = cols;
                 traversed_one_row = true;
             }

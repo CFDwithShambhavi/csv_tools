@@ -8,11 +8,7 @@
 #include "CSV_tools.cpp"
 
 int main() {
-    
-    {
-    scope load_dataa(new CSV_tools<double>());
-    }
-    
+        
     std::string path_name = "/Users/snandan/CSV_tools/CSV_tools/";
     std::string file_name = path_name + "Most-Recent-Cohorts-Scorecard-Elements.csv";
     CSV_tools<std::string> load_data;

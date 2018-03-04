@@ -11,12 +11,14 @@
 #include <iostream>
 #include <fstream>
 #include <sstream>
+#include <type_traits>
 
 template <typename T>
 CSV_tools<T>::CSV_tools()
     : row_count_with_headers(0),
     row_count_without_headers(0),
     column_count(0),
+    data_type("unknown"),
     headers(NULL),
     units(NULL),
     header_data(NULL),
@@ -38,6 +40,23 @@ CSV_tools<T>::CSV_tools(const int& rows_without_headers, const int& columns)
 template <typename T>
 CSV_tools<T>::~CSV_tools(){
     }
+
+template <typename T>
+std::string CSV_tools<T>::dataType(){
+    
+    if(std::is_same<T, int>::value){
+        data_type = "inetegr";
+    }
+    else if(std::is_same<T, double>::value){
+        data_type = "double";
+    }
+    else if(std::is_same<T, std::string>::value){
+        data_type = "std::string";
+    }
+    else{
+        data_type = "data type can not be deduced";
+    }
+}
 
 template <typename T>
 void CSV_tools<T>::initialise_memory(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator){
@@ -136,29 +155,34 @@ std::map<std::string, std::vector<T>>& CSV_tools<T>::read_Data(const std::string
 }
 
 template <typename T>
-int CSV_tools<T>::get_row_count_with_headers() const{
+const int& CSV_tools<T>::get_row_count_with_headers() const{
     return row_count_with_headers;
     }
 
 template <typename T>
-int CSV_tools<T>::get_row_count_without_headers() const{
+const int& CSV_tools<T>::get_row_count_without_headers() const{
     return row_count_without_headers;
 }
 
 
 template <typename T>
-int CSV_tools<T>::get_column_count() const{
+const int& CSV_tools<T>::get_column_count() const{
     return column_count;
     }
 
 template <typename T>
-std::vector<std::string> CSV_tools<T>::get_headers() const{
+const std::vector<std::string>& CSV_tools<T>::get_headers() const{
     return headers;
     }
 
 template <typename T>
-std::vector<std::string> CSV_tools<T>::get_units() const{
+const std::vector<std::string>& CSV_tools<T>::get_units() const{
     return units;
+}
+
+template <typename T>
+const std::string& CSV_tools<T>::get_data_type() const{
+    return data_type;
 }
 
 template <typename T>

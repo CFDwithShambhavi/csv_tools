@@ -20,6 +20,7 @@ private:
     int row_count_with_headers;
     int row_count_without_headers;
     int column_count;
+    std::string data_type;
     std::vector< std::string > headers;
     std::vector< std::string > units;
     std::vector<T> header_data;
@@ -28,6 +29,7 @@ private:
     std::map<std::string, std::vector<T>> Data;
 
 private:
+    std::string dataType();
     void initialise_memory(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator);
     
 public:
@@ -38,29 +40,14 @@ public:
 public:
     std::map<std::string, std::vector<T>>& read_Data(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator);
     
-    int get_row_count_with_headers() const;
-    int get_row_count_without_headers() const;
-    int get_column_count() const;
+    const int& get_row_count_with_headers() const;
+    const int& get_row_count_without_headers() const;
+    const int& get_column_count() const;
+    const std::string& get_data_type() const;
     const std::vector<T>& get_data_in_row(const int& row_num);
     const std::vector<T>& get_data_under_header(const std::string& header_name);
-    std::vector<std::string> get_headers() const;
-    std::vector<std::string> get_units() const;
-};
-
-class scope{
-    
-private:
-    CSV_tools<double>* ptr;
-public:
-    scope(CSV_tools<double>* ptr)
-    :ptr(ptr)
-    {
-    }
-    
-    ~scope(){
-        delete ptr;
-    }
-    
+    const std::vector<std::string>& get_headers() const;
+    const std::vector<std::string>& get_units() const;
 };
 
 #endif /* CSV_tools_hpp */

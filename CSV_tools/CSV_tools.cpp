@@ -46,7 +46,7 @@ template <typename T>
 std::string CSV_tools<T>::dataType()
 {
     if(std::is_same<T, int>::value){
-        data_type = "inetegr";
+        data_type = "integer";
     }
     else if(std::is_same<T, double>::value){
         data_type = "double";

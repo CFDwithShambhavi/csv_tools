@@ -38,12 +38,13 @@ CSV_tools<T>::CSV_tools(const int& rows_without_headers, const int& columns)
 }
 
 template <typename T>
-CSV_tools<T>::~CSV_tools(){
-    }
+CSV_tools<T>::~CSV_tools()
+{
+}
 
 template <typename T>
-std::string CSV_tools<T>::dataType(){
-    
+std::string CSV_tools<T>::dataType()
+{
     if(std::is_same<T, int>::value){
         data_type = "inetegr";
     }
@@ -59,29 +60,28 @@ std::string CSV_tools<T>::dataType(){
 }
 
 template <typename T>
-void CSV_tools<T>::initialise_memory(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator){
+void CSV_tools<T>::initialise_memory(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator)
+{
+    bool traversed_one_row = false;
+    std::string line;
+
+    std::ifstream data(file_name);
+    while(std::getline(data, line))
+    {
+        row_count_with_headers += 1;
         
-        std::ifstream data(file_name);
+        std::stringstream lineStream(line);
+        std::string elements;
         
-        bool traversed_one_row = false;
-        std::string line;
-        while(std::getline(data, line))
+        if (!traversed_one_row)
         {
-            row_count_with_headers += 1;
-            
-            std::stringstream lineStream(line);
-            std::string elements;
-            int cols = 0;
-            
-            while(std::getline(lineStream, elements, separator))
-            {
-                cols += 1;
-                    }
-            if (!traversed_one_row){
-                column_count = cols;
-                traversed_one_row = true;
-            }
+        while(std::getline(lineStream, elements, separator))
+        {
+            column_count += 1;
         }
+            traversed_one_row = true;
+        }
+    }
     
     if (headers_ == true & units_ == true){
         row_count_without_headers = row_count_with_headers - 2;
@@ -94,12 +94,12 @@ void CSV_tools<T>::initialise_memory(const std::string& file_name, const bool& h
     }
 
     CSV_tools(row_count_without_headers, column_count);
-    }
+}
 
 
 template <typename T>
-const std::map<std::string, std::vector<T>>& CSV_tools<T>::read_Data(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator){
-    
+const std::map<std::string, std::vector<T>>& CSV_tools<T>::read_Data(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator)
+{
     initialise_memory(file_name, headers_, units_, separator);
     
     std::ifstream data(file_name);
@@ -155,44 +155,52 @@ const std::map<std::string, std::vector<T>>& CSV_tools<T>::read_Data(const std::
 }
 
 template <typename T>
-const int& CSV_tools<T>::get_row_count_with_headers() const{
+const int& CSV_tools<T>::get_row_count_with_headers() const
+{
     return row_count_with_headers;
-    }
+}
 
 template <typename T>
-const int& CSV_tools<T>::get_row_count_without_headers() const{
+const int& CSV_tools<T>::get_row_count_without_headers() const
+{
     return row_count_without_headers;
 }
 
 
 template <typename T>
-const int& CSV_tools<T>::get_column_count() const{
+const int& CSV_tools<T>::get_column_count() const
+{
     return column_count;
-    }
+}
 
 template <typename T>
-const std::vector<std::string>& CSV_tools<T>::get_headers() const{
+const std::vector<std::string>& CSV_tools<T>::get_headers() const
+{
     return headers;
-    }
+}
 
 template <typename T>
-const std::vector<std::string>& CSV_tools<T>::get_units() const{
+const std::vector<std::string>& CSV_tools<T>::get_units() const
+{
     return units;
 }
 
 template <typename T>
-const std::string& CSV_tools<T>::get_data_type() const{
+const std::string& CSV_tools<T>::get_data_type() const
+{
     return data_type;
 }
 
 template <typename T>
-const std::vector<T>& CSV_tools<T>::get_data_under_header(const std::string& header_name){
+const std::vector<T>& CSV_tools<T>::get_data_under_header(const std::string& header_name)
+{
     header_data = Data[header_name];
     return header_data;
 }
 
 template <typename T>
-const std::vector<T>& CSV_tools<T>::get_data_in_row(const int& row_num){
+const std::vector<T>& CSV_tools<T>::get_data_in_row(const int& row_num)
+{
     row_data = csv_data[row_num];
     return row_data;
 }

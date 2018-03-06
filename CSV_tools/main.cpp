@@ -13,10 +13,7 @@ int main() {
     std::string file_name = path_name + "Most-Recent-Cohorts-Scorecard-Elements.csv";
     CSV_Reader<float> load_data;
     load_data.read_Data(file_name, true, false, ',');
-    //load_data.get_transpose_VectorData_without_headers();
-    load_data.get_ArrayData_in_row(0);
-    load_data.get_ArrayData_without_headers();
-    //load_data.get_Array_Data();
+    const float* p = load_data.get_ArrayData_in_row(0);
     
     std::cout<< load_data.get_row_count_with_headers() <<std::endl;
     
@@ -27,7 +24,7 @@ int main() {
     std::cout<<headers.size()<<std::endl;
     
     for(int i = 0; i < headers.size(); i++) {
-        std::cout<<headers.at(i)<<std::endl;
+        std::cout<<p[i]<<std::endl;
     }
 
         return 0;

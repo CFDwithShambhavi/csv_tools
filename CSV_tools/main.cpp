@@ -11,21 +11,24 @@ int main() {
         
     std::string path_name = "/Users/snandan/CSV_tools/CSV_tools/";
     std::string file_name = path_name + "Most-Recent-Cohorts-Scorecard-Elements.csv";
-    CSV_tools<std::string> load_data;
+    CSV_Reader<float> load_data;
     load_data.read_Data(file_name, true, false, ',');
-    int c = load_data.get_column_count();
-    std::cout<< c <<std::endl;
+    //load_data.get_transpose_VectorData_without_headers();
+    load_data.get_ArrayData_in_row(0);
+    load_data.get_ArrayData_without_headers();
+    //load_data.get_Array_Data();
+    
     std::cout<< load_data.get_row_count_with_headers() <<std::endl;
+    
     std::vector<std::string> headers;
     headers.reserve(load_data.get_column_count());
     headers = load_data.get_headers();
+    
     std::cout<<headers.size()<<std::endl;
-    int row_num = 0;
-    std::vector<std::string> row_data = load_data.get_data_in_row(row_num);
     
     for(int i = 0; i < headers.size(); i++) {
-        std::cout<<headers[i]<<std::endl;
+        std::cout<<headers.at(i)<<std::endl;
     }
-    
+
         return 0;
 }

@@ -12,7 +12,6 @@
 #include <string>
 #include <vector>
 #include <map>
-#include <array>
 
 template <typename T>
 class CSV_Reader{
@@ -43,6 +42,8 @@ private:
     void fill_2D_Vector(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator);
     void fill_2D_Vector_map();
     
+    int find_header(const std::string& header_name);
+    
     T& operator[](const T* csv_data_);
     
 public:
@@ -66,8 +67,7 @@ public:
     const std::map<std::string, std::vector<T>>& get_Vector_Data() const;
     
     const T* get_ArrayData_in_row(const int& row_num);
-    //const T& get_ArrayData_under_header(const std::string& header_name);
-    //const std::map<std::string, T*>& get_Array_Data();
+    const T* get_ArrayData_under_header(const std::string& header_name);
     const T* get_ArrayData_without_headers() const;
 
 };

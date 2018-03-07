@@ -12,7 +12,6 @@
 #include <fstream>
 #include <sstream>
 #include <type_traits>
-#include <array>
 
 template <typename T>
 CSV_Reader<T>::CSV_Reader()
@@ -177,6 +176,21 @@ void CSV_Reader<T>::fill_2D_Array()
 }
 
 template <typename T>
+int CSV_Reader<T>::find_header(const std::string& header_name)
+{
+    int index = 0;
+    for(int i = 0; i < column_count; i++)
+    {
+        if(headers[i] == header_name)
+        {
+            index = i;
+            break;
+        }
+    }
+    return index;
+}
+
+template <typename T>
 void CSV_Reader<T>::read_Data(const std::string& file_name, const bool& headers_, const bool& units_, const char& separator)
 {
     dataType();
@@ -231,6 +245,19 @@ const std::vector<T>& CSV_Reader<T>::get_VectorData_under_header(const std::stri
 {
     header_vector_data = vector_Data[header_name];
     return header_vector_data;
+}
+
+template <typename T>
+const T* CSV_Reader<T>::get_ArrayData_under_header(const std::string& header_name)
+{
+    int h_index = find_header(header_name);
+    
+    for(int i = 0; i < row_count_without_headers; i++)
+        {
+            header_array_data[i] = csv_vector_data[i][h_index];
+        }
+    
+    return header_array_data;
 }
 
 template <typename T>

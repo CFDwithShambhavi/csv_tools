@@ -7,6 +7,9 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		46933C06205C35D0009DFFF7 /* CSV_Reader.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46933C05205C35D0009DFFF7 /* CSV_Reader.cpp */; };
+		46933C08205C37B9009DFFF7 /* CSV_VectorData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46933C07205C37B9009DFFF7 /* CSV_VectorData.cpp */; };
+		46933C0A205C4073009DFFF7 /* CSV_ArrayData.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46933C09205C4073009DFFF7 /* CSV_ArrayData.cpp */; };
 		46E32FE820441473006AD597 /* main.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46E32FE720441473006AD597 /* main.cpp */; };
 		46E32FF02044149C006AD597 /* CSV_tools.cpp in Sources */ = {isa = PBXBuildFile; fileRef = 46E32FEE2044149C006AD597 /* CSV_tools.cpp */; };
 /* End PBXBuildFile section */
@@ -24,6 +27,9 @@
 /* End PBXCopyFilesBuildPhase section */
 
 /* Begin PBXFileReference section */
+		46933C05205C35D0009DFFF7 /* CSV_Reader.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CSV_Reader.cpp; sourceTree = "<group>"; };
+		46933C07205C37B9009DFFF7 /* CSV_VectorData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CSV_VectorData.cpp; sourceTree = "<group>"; };
+		46933C09205C4073009DFFF7 /* CSV_ArrayData.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CSV_ArrayData.cpp; sourceTree = "<group>"; };
 		46E32FE420441473006AD597 /* CSV_tools */ = {isa = PBXFileReference; explicitFileType = "compiled.mach-o.executable"; includeInIndex = 0; path = CSV_tools; sourceTree = BUILT_PRODUCTS_DIR; };
 		46E32FE720441473006AD597 /* main.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = main.cpp; sourceTree = "<group>"; };
 		46E32FEE2044149C006AD597 /* CSV_tools.cpp */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.cpp.cpp; path = CSV_tools.cpp; sourceTree = "<group>"; };
@@ -61,8 +67,11 @@
 			isa = PBXGroup;
 			children = (
 				46E32FE720441473006AD597 /* main.cpp */,
+				46933C05205C35D0009DFFF7 /* CSV_Reader.cpp */,
 				46E32FEE2044149C006AD597 /* CSV_tools.cpp */,
+				46933C07205C37B9009DFFF7 /* CSV_VectorData.cpp */,
 				46E32FEF2044149C006AD597 /* CSV_tools.hpp */,
+				46933C09205C4073009DFFF7 /* CSV_ArrayData.cpp */,
 			);
 			path = CSV_tools;
 			sourceTree = "<group>";
@@ -126,6 +135,9 @@
 			files = (
 				46E32FF02044149C006AD597 /* CSV_tools.cpp in Sources */,
 				46E32FE820441473006AD597 /* main.cpp in Sources */,
+				46933C0A205C4073009DFFF7 /* CSV_ArrayData.cpp in Sources */,
+				46933C06205C35D0009DFFF7 /* CSV_Reader.cpp in Sources */,
+				46933C08205C37B9009DFFF7 /* CSV_VectorData.cpp in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -6,7 +6,9 @@
 //  Copyright © 2018 Shambhavi Nandan. All rights reserved.
 //
 
-#include "CSV_VectorData.cpp"
+#include "CSV_tools.hpp"
+
+#include <iostream>
 
 template <typename T>
 CSV_ArrayData<T>::CSV_ArrayData(const std::string& file_name, const bool& have_headers, const bool& have_units, const char& separator)

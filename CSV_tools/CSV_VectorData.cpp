@@ -6,7 +6,7 @@
 //  Copyright © 2018 Shambhavi Nandan. All rights reserved.
 //
 
-#include "CSV_tools.hpp"
+#include "CSV_VectorData.h"
 
 #include <iostream>
 #include <fstream>
@@ -142,10 +142,10 @@ const std::vector<std::vector<T>>& CSV_VectorData<T>::getTransposeVectorDataWith
     if(transposeCSVData.empty())
     {
         std::vector<T> rowData;
-        rowData.reserve(CSV_Reader<T>::rowCountWithoutHeaders);
-        for(int i = 0; i < CSV_Reader<T>::columnCount; i++)
+        rowData.reserve(rowCountWithoutHeaders);
+        for(int i = 0; i < columnCount; i++)
         {
-            for(int j = 0; j < CSV_Reader<T>::rowCountWithoutHeaders; j++)
+            for(int j = 0; j < rowCountWithoutHeaders; j++)
             {
                 rowData.emplace_back(csvData[j][i]);
             }
